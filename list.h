@@ -220,6 +220,7 @@ T List<T>::last() const {
 //
 // @returns the element in index
 // @throws IndexOutOfBounds, if index >= size.
+// It has a complexity of O(n)
 // =================================================================
 template <class T>
 T List<T>::get(uint index) const {
@@ -239,7 +240,6 @@ T List<T>::get(uint index) const {
 
 	aux = p->value;
 	return aux;
-	//checar
 }
 
 // =================================================================
@@ -285,6 +285,7 @@ void List<T>::push_back(T val) {
 // was in that position is shifted to the right.
 //
 // @throws IndexOutOfBounds, if index > size.
+// It has a complexity of O(n)
 // =================================================================
 template <class T>
 void List<T>::insert_at(T val, uint index) {
@@ -309,7 +310,6 @@ void List<T>::insert_at(T val, uint index) {
 	q->next = p->next;
 	p->next = q;
 	size++;
-	//checar
 }
 
 // =================================================================
@@ -377,6 +377,7 @@ T List<T>::pop_back() {
 //
 // @returns the element that was in index.
 // @throws IndexOutOfBounds, if index >= size.
+// It has a complexity of O(n)
 // =================================================================
 template <class T>
 T List<T>::remove_at(uint index) {
@@ -405,7 +406,6 @@ T List<T>::remove_at(uint index) {
 	size--;
 	
 	return aux;
-	//checar
 }
 
 // =================================================================
@@ -413,6 +413,7 @@ T List<T>::remove_at(uint index) {
 //
 // @returns the position of an item in the list, -1 otherwise.
 // @throws IndexOutOfBounds, if index >= size.
+// It has a complexity of O(n)
 // =================================================================
 template <class T>
 long int List<T>::indexOf(T val) const {
@@ -426,7 +427,6 @@ long int List<T>::indexOf(T val) const {
 		p = p->next;
 	}
 	return -1;
-	//checar
 }
 
 #endif /* LIST_H */
