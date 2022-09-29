@@ -1,8 +1,8 @@
 // =================================================================
 //
 // File: list.h
-// Author:
-// Date:
+// Author: José Diego Llaca Castro
+// Date: 28/09/2022
 // 
 // =================================================================
 #ifndef LIST_H
@@ -224,9 +224,22 @@ T List<T>::last() const {
 template <class T>
 T List<T>::get(uint index) const {
 	T aux;
+	Node<T> *p;
+	int count = 0;
 
-	// TO DO
+	if (index >= size){
+		throw IndexOutOfBounds();
+	}
+
+	p = head;
+	while (count != index) {
+		p = p->next;
+		count++;
+	}
+
+	aux = p->value;
 	return aux;
+	//checar
 }
 
 // =================================================================
@@ -275,7 +288,28 @@ void List<T>::push_back(T val) {
 // =================================================================
 template <class T>
 void List<T>::insert_at(T val, uint index) {
-	// TO DO
+
+	if (index < 0 || index > size){
+		throw IndexOutOfBounds();
+	}
+
+	if (index == 0){
+		return push_front(val);
+	}
+
+	Node<T> *p, *q;
+	q = new Node<T>(val);
+	q->next=NULL;
+	p = head;
+	
+	for (int count = 0; count<(index-1); count++) {
+		p = p->next;
+	}
+	
+	q->next = p->next;
+	p->next = q;
+	size++;
+	//checar
 }
 
 // =================================================================
@@ -346,9 +380,32 @@ T List<T>::pop_back() {
 // =================================================================
 template <class T>
 T List<T>::remove_at(uint index) {
+	
+	if (index < 0 || index > size){
+		throw IndexOutOfBounds();
+	}
+
+	if (index == 0){
+		return pop_front();
+	}
+
 	T aux;
-	// TO DO
+	Node<T> *p, *q;
+
+	p = head;
+	for (int count = 0; count<(index-1) && p != NULL; count++) {
+		p = p->next;
+	}
+
+	q = p->next;
+	p->next = q->next;
+	aux = q->value;
+
+	delete p; 
+	size--;
+	
 	return aux;
+	//checar
 }
 
 // =================================================================
@@ -359,8 +416,17 @@ T List<T>::remove_at(uint index) {
 // =================================================================
 template <class T>
 long int List<T>::indexOf(T val) const {
-	// TO DO
+	Node<T> *p;
+	p = head;
+
+	for (int count = 0; count<size && p != NULL; count++) {
+		if (p->value == val){
+			return count;
+		}
+		p = p->next;
+	}
 	return -1;
+	//checar
 }
 
 #endif /* LIST_H */
